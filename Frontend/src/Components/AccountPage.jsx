@@ -4,6 +4,8 @@ import { Navigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import AccountNav from '../AccountNav';
+import Task from '../Task';
+
 
 const AccountPage = () => {
   const [redirect, setRedirect] = useState(null)
@@ -38,6 +40,7 @@ const AccountPage = () => {
   return (
     <div>
       <AccountNav/>
+      <Task/>
       {subpage === 'profile' && (
         <div className="text-center max-w-lg mx-auto">
           Logged in as {user.name} ({user.email})

@@ -3,7 +3,7 @@ import { FaEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import { v4 as uuidv4 } from 'uuid';
 
-function Todo() {
+function Task() {
 
   const [todo, setTodo] = useState("")
   const [todos, setTodos] = useState([])
@@ -106,4 +106,4 @@ function Todo() {
   )
 }
 
-export default Todo
+export default Task
