@@ -9,11 +9,6 @@ const Header = () => {
   return (
     <header className='justify-between flex'>
       <Link to={'/'} className='flex items-center gap-1'>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M1.5 12s4.5-7.5 10.5-7.5S22.5 12 22.5 12s-4.5 7.5-10.5 7.5S1.5 12 1.5 12Z" />
-          <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
-
         <span className='font-bold text-xl'>QuadB</span>
       </Link>
       <Link to={user ? '/account' : '/login'} className='flex border border-gray-300 rounded-full py-2 px-4 gap-2 shadow-sm shadow-gray-100 items-center'>

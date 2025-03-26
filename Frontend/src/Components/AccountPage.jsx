@@ -24,7 +24,7 @@ const AccountPage = () => {
   const { ready, user, setUser } = useContext(UserContext);
 
   if (!ready) {
-    return 'Loading...';
+    return <div>Loading... </div>;
   }
 
   if (ready && !user && !redirect) {
@@ -44,7 +44,7 @@ const AccountPage = () => {
       {subpage === 'profile' && (
         <div className="text-center max-w-lg mx-auto">
           Logged in as {user.name} ({user.email})
-          <button onClick={logout} className='bg-[#F5385D] max-w-sm mt-2'>Logout</button>
+          <button onClick={logout} className='bg-[#F5385D] m-2 max-w-sm mt-2 rounded-full px-4 py-1'>Logout</button>
         </div>
       )}
     </div>

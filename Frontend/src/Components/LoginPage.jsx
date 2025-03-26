@@ -22,7 +22,7 @@ export default function LoginPage() {
   }
 
   if (redirect) {
-    return <Navigate to={'/todo'} />
+    return <Navigate to={'/account'} />
   }
 
   return (

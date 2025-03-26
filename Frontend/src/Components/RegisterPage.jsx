@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useState } from 'react'
 
@@ -7,6 +7,7 @@ import { useState } from 'react'
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate();
   const registerUser = async (ev) => {
     ev.preventDefault()
     try {
@@ -15,10 +16,11 @@ import { useState } from 'react'
         email,
         password,
       });
-      alert('Registration Successful. Now you can log in')
+      alert('Registration Successful. Now you can log in');
+      navigate('/login');
     } catch (e) {
-      alert('Registration Failed. Please Try again Later')
-      console.log(e)
+      alert('Registration Failed. Please Try again Later');
+      console.log(e);
     }
   }
 
