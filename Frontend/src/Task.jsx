@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { FaEdit } from "react-icons/fa";
-import { AiFillDelete } from "react-icons/ai";
+import { FaEdit, FaTrashAlt, FaCheckCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from 'uuid';
 import WeatherList from './WeatherList';
 
 function Task() {
   const [todo, setTodo] = useState("");
+  const [city, setCity] = useState("");
   const [todos, setTodos] = useState([]);
   const [showFinished, setshowFinished] = useState(true);
 
@@ -28,6 +28,7 @@ function Task() {
   const handleEdit = (e, id) => {
     let t = todos.filter(i => i.id === id);
     setTodo(t[0].todo);
+    setCity(t[0].city);
     let newTodos = todos.filter(item => item.id !== id);
     setTodos(newTodos);
     saveToLS();
@@ -40,8 +41,9 @@ function Task() {
   };
 
   const handleAdd = () => {
-    setTodos([...todos, { id: uuidv4(), todo, isCompleted: false }]);
+    setTodos([...todos, { id: uuidv4(), todo, city, isCompleted: false }]);
     setTodo("");
+    setCity("");
     saveToLS();
   };
 
@@ -60,72 +62,71 @@ function Task() {
 
   return (
     <>
-      <div className="mx-2 md:container md:mx-auto my-5 rounded-xl p-5 bg-violet-100 min-h-[80vh] md:w-[35%]">
-        <h1 className='font-bold text-center text-2xl w-full mb-3'>iTask - Get Things Done</h1>
-        <div className="addTodo my-5 flex flex-col gap-4">
-          <h2 className='text-xl font-bold'>Add a To do</h2>
-          <div className="flex">
+      <div className="container mx-auto my-5 p-5 bg-gray-100 rounded-lg shadow-lg">
+        <h1 className="text-center text-3xl font-bold text-indigo-700 mb-5">iTask - Get Things Done</h1>
+        <div className="addTodo mb-5">
+          <h2 className="text-xl font-semibold mb-3">Add a To-Do</h2>
+          <div className="flex flex-col md:flex-row gap-3">
             <input
               onChange={handleChange}
               value={todo}
               type="text"
-              className='w-full rounded-full px-5 py-1 outline-none border-violet-700 border-2'
+              placeholder="Enter task"
+              className="flex-1 rounded-lg px-4 py-2 border-2 border-indigo-500 outline-none"
+            />
+            <input
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
+              type="text"
+              placeholder="Enter city or state"
+              className="flex-1 rounded-lg px-4 py-2 border-2 border-indigo-500 outline-none"
             />
             <button
               onClick={handleAdd}
-              disabled={todo.length <= 3}
-              className='bg-violet-800 mx-2 rounded-full hover:bg-violet-950 disabled:bg-violet-500 p-4 py-2 text-sm font-bold text-white'
+              disabled={todo.length === 0 || city.length === 0}
+              className="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 disabled:bg-gray-400"
             >
               Save
             </button>
           </div>
         </div>
-        <input
-          className='my-4'
-          id='show'
-          onChange={toggleFinished}
-          type="checkbox"
-          checked={showFinished}
-        />
-        <label className='mx-2' htmlFor="show">Show Finished</label>
-        <div className='h-[1px] bg-black opacity-15 w-[90%] mx-auto my-2'></div>
-        <h2 className='text-xl font-bold'>Your To Do's</h2>
         <div className="todos">
-          {todos.length === 0 && <div className='m-5'>No To Do's to display</div>}
+          <h2 className="text-xl font-semibold mb-3">Your To-Do's</h2>
+          {todos.length === 0 && <p className="text-gray-500">No To-Do's to display</p>}
           {todos.map(item => (
             (showFinished || !item.isCompleted) && (
-              <div key={item.id} className={"todo flex my-3 justify-between"}>
-                <div className='flex gap-5'>
+              <div key={item.id} className="todo flex justify-between items-center bg-white p-3 rounded-lg shadow-md mb-3">
+                <div className="flex items-center gap-3">
                   <input
                     name={item.id}
                     onChange={handleCheckbox}
                     type="checkbox"
                     checked={item.isCompleted}
+                    className="w-5 h-5"
                   />
-                  <div className={item.isCompleted ? "line-through" : ""}>{item.todo}</div>
+                  <div className={item.isCompleted ? "line-through text-gray-500" : "text-gray-800"}>
+                    {item.todo} <span className="text-indigo-600">({item.city})</span>
+                  </div>
                 </div>
-                <div className="buttons flex h-full">
+                <div className="flex items-center gap-2">
                   <button
                     onClick={(e) => handleEdit(e, item.id)}
-                    className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold text-white rounded-md mx-1'
+                    className="text-indigo-600 hover:text-indigo-800"
                   >
                     <FaEdit />
                   </button>
                   <button
                     onClick={(e) => handleDelete(e, item.id)}
-                    className='bg-violet-800 hover:bg-violet-950 p-2 py-1 text-sm font-bold text-white rounded-md mx-1'
+                    className="text-red-600 hover:text-red-800"
                   >
-                    <AiFillDelete />
+                    <FaTrashAlt />
                   </button>
                 </div>
               </div>
             )
           ))}
         </div>
-        <div>
-          {/* Pass todos to WeatherList */}
-          <WeatherList tasks={todos} />
-        </div>
+        <WeatherList tasks={todos} />
       </div>
     </>
   );

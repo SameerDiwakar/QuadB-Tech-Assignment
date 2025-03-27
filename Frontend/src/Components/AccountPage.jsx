@@ -39,7 +39,7 @@ const AccountPage = () => {
 
   return (
     <div>
-      <AccountNav/>
+      {/* <AccountNav/> */}
       <Task/>
       {subpage === 'profile' && (
         <div className="text-center max-w-lg mx-auto">

@@ -42,7 +42,9 @@ export const weatherReducer = weatherSlice.reducer;
 export const fetchWeather = (city) => async (dispatch) => {
   dispatch(fetchWeatherStart());
   try {
-    const response = await axios.get(`http://localhost:4000/weather?city=${city || 'Delhi'}`);
+    const response = await axios.get(
+      `http://localhost:4000/weather?city=${city}` // Fetch weather for the provided city
+    );
     dispatch(fetchWeatherSuccess(response.data));
   } catch (error) {
     dispatch(fetchWeatherFailure(error.response?.data?.message || 'Failed to fetch weather data'));
