@@ -46,7 +46,7 @@ const AccountPage = () => {
         <div className="text-center w-full p-2 flex items-center justify-center bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-lg">
         
         <p className="text-gray-700 font-medium">
-          Logged in as <span className="text-pink-500 font-semibold">{user.name}</span> ({user.email})
+          Logged in <span className="text-pink-500 font-semibold">{user.name}</span> ({user.email})
         </p>
         <button
           onClick={logout}

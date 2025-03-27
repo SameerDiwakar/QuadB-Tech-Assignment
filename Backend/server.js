@@ -19,6 +19,7 @@ app.use(
   cors({
     credentials: true,
     origin: "https://quadb-tech-assignment-1.onrender.com",
+    // origin: "http://localhost:5173",
   })
 );
 
