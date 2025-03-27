@@ -3,8 +3,8 @@ import { UserContext } from '../UserContext';
 import { Navigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
-// import AccountNav from './AccountNav';
-import Task from './Task';
+import AccountNav from '../Components/AccountNav';
+import Task from '../components/Task';
 
 
 const AccountPage = () => {

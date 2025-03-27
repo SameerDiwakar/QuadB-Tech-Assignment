@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
-  const {setUser} = useContext(UserContext);
+  const {setUser, setUserID} = useContext(UserContext); // Add setUserID from context
 
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
@@ -20,6 +20,8 @@ export default function LoginPage() {
     try {
       const {data} = await axios.post('/login', {email,password});
       setUser(data);
+      const userID = data.id; // Extract user ID from login response
+      setUserID(userID); // Store userID in context
       alert('Login successful');
       setRedirect(true);
     } catch (e) {
@@ -67,3 +69,4 @@ export default function LoginPage() {
     </div>
   );
 }
+
