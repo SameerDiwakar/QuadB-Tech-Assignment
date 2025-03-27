@@ -4,7 +4,7 @@ import { Navigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import AccountNav from '../Components/AccountNav';
-import Task from '../components/Task';
+import Task from '../Task';
 
 
 const AccountPage = () => {

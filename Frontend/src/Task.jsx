@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { FaEdit, FaTrashAlt, FaCheckCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from 'uuid';
-import WeatherList from '../Store/WeatherList';
-import { UserContext } from '../UserContext'; 
+import WeatherList from './Store/WeatherList';
+import { UserContext } from './UserContext'; 
 
 function Task() {
   const [todo, setTodo] = useState("");
