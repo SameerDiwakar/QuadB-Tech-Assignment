@@ -7,7 +7,7 @@ import RegisterPage from './Pages/RegisterPage'
 import axios from 'axios'
 import { UserContextProvider } from './UserContext'
 import AccountPage from './Pages/AccountPage'
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'https://quadb-tech-assignment-vg7t.onrender.com/'
 axios.defaults.withCredentials = true
 
 function App() {

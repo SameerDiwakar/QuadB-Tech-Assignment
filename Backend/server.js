@@ -18,7 +18,7 @@ app.use(cookieParser())
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: "https://quadb-tech-assignment-1.onrender.com/",
   })
 );
 
