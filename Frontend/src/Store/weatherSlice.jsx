@@ -38,12 +38,12 @@ export const {
 } = weatherSlice.actions;
 export const weatherReducer = weatherSlice.reducer;
 
-// Async Thunk Function to Fetch Weather
+
 export const fetchWeather = (city) => async (dispatch) => {
   dispatch(fetchWeatherStart());
   try {
     const response = await axios.get(
-      `http://localhost:4000/weather?city=${city}` // Fetch weather for the provided city
+      `https://quadb-tech-assignment-vg7t.onrender.com/weather?city=${city}`
     );
     dispatch(fetchWeatherSuccess(response.data));
   } catch (error) {
