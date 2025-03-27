@@ -7,7 +7,7 @@ const User = require("./models/user");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
-
+const axios = require('axios');
 const port = 4000;
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'ndwnd93er932rh02'
@@ -79,6 +79,20 @@ app.get('/profile', (req,res) => {
 app.post('/logout',(req,res)=>{
   res.cookie('token','').json(true)
 })
+
+app.get('/weather', async (req, res) => {
+  const { city } = req.query;
+  const API_KEY = process.env.OPENWEATHER_API_KEY;
+  try {
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching weather data:', error.response?.data || error.message); // Log the error
+    res.status(error.response?.status || 500).json(error.response?.data || { message: 'Error fetching weather data' });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
