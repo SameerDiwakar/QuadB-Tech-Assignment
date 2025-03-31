@@ -1,5 +1,11 @@
 # QuadB Tech Assignment
 
+## Live Demo  
+Check out the live project: [QuadB Tech Assignment](https://quadb-tech-assignment-1.onrender.com/)  
+
+> **Note:** Since the project is deployed on a free plan, the server may take some time to wake up. If the link doesn't work on the first attempt, try refreshing or navigating between pages 2-3 times.  
+
+
 ## Setup and Run Locally
 
 Follow these steps to clone the repository and run the project locally.
