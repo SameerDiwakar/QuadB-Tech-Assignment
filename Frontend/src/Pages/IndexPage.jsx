@@ -16,13 +16,27 @@ const IndexPage = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
+  const handleGetStarted = () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+      navigate("/account");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="text-center py-16 px-6">
         <h1 className="text-4xl font-bold text-gray-800">Welcome to TaskMaster</h1>
         <p className="text-lg text-gray-600 mt-4">Your ultimate To-Do application to manage tasks efficiently.</p>
-        <button className="mt-6 px-6 py-3 text-lg bg-pink-600 text-white rounded-lg shadow-md hover:bg-pink-500" onClick={() => navigate("/account")}>Get Started</button>
+        <button
+          className="mt-6 px-6 py-3 text-lg bg-pink-600 text-white rounded-lg shadow-md hover:bg-pink-500"
+          onClick={handleGetStarted}
+        >
+          Get Started
+        </button>
       </section>
       
       {/* Slider Section */}
