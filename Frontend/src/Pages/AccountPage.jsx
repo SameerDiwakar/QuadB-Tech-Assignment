@@ -41,6 +41,19 @@ const AccountPage = () => {
     <div className='mt-5'>
       {/* <AccountNav/> */}
       <Task/>
+      <div className="text-center my-4">
+        <button
+          onClick={() => {
+            if (user) {
+              setRedirect('/account');
+            } else {
+              setRedirect('/login');
+            }
+          }}
+          className="bg-blue-500 text-white font-medium px-5 py-2 rounded-full transition-all duration-300 hover:bg-blue-600 hover:scale-105 active:scale-95">
+          Get Started
+        </button>
+      </div>
       {subpage === 'profile' && (
         
         <div className="text-center w-full p-2 flex items-center justify-center bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-lg">
