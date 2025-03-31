@@ -43,24 +43,29 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post('/login', async (req,res) => {
-  const {email,password} = req.body;
-  const userDoc = await User.findOne({email});
-  if (userDoc) {
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const userDoc = await User.findOne({ email });
+    if (!userDoc) {
+      return res.status(404).json({ message: 'User not found' });
+    }
     const passOk = bcrypt.compareSync(password, userDoc.password);
-    if (passOk) {
-      jwt.sign({
-        email:userDoc.email,
-        id:userDoc._id
-      }, jwtSecret, {}, (err,token) => {
+    if (!passOk) {
+      return res.status(401).json({ message: 'Invalid password' });
+    }
+    jwt.sign(
+      { email: userDoc.email, id: userDoc._id },
+      jwtSecret,
+      {},
+      (err, token) => {
         if (err) throw err;
         res.cookie('token', token).json(userDoc);
-      });
-    } else {
-      res.status(422).json('pass not ok');
-    }
-  } else {
-    res.json('not found');
+      }
+    );
+  } catch (e) {
+    console.error('Login error:', e);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 

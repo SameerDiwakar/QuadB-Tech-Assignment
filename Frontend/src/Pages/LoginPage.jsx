@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
-  const {setUser, setUserID} = useContext(UserContext); // Add setUserID from context
+  const {setUser, setUserID} = useContext(UserContext); 
 
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
@@ -18,14 +18,20 @@ export default function LoginPage() {
       return;
     }
     try {
-      const {data} = await axios.post('/login', {email,password});
+      const {data} = await axios.post('/login', {email, password});
       setUser(data);
-      const userID = data; // Extract user ID from login response
-      setUserID(userID); // Store userID in context
+      const userID = data; 
+      setUserID(userID); 
       alert('Login successful');
       setRedirect(true);
     } catch (e) {
-      alert('Login failed');
+      if (e.response && e.response.status === 401) {
+        alert('Invalid email or password');
+      } else if (e.response && e.response.status === 400) {
+        alert('Invalid email format');
+      } else {
+        alert('Login failed. Please try again later.');
+      }
     }
   }
 
